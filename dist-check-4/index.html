@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanushree Portfolio</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body,
+      #root {
+        margin: 0;
+        min-height: 100%;
+        background: #050505;
+        color: white;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .fallback-page {
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+        padding: 56px;
+        background:
+          radial-gradient(circle at 70% 18%, rgba(20, 184, 166, 0.22), transparent 30%),
+          linear-gradient(135deg, #050505 0%, #071315 55%, #050505 100%);
+      }
+
+      .fallback-content {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 420px;
+        gap: 36px;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .fallback-copy {
+        min-width: 0;
+      }
+
+      .fallback-eyebrow {
+        margin: 0 0 12px;
+        color: #7dd3fc;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .fallback-page h1 {
+        margin: 0;
+        font-size: clamp(44px, 8vw, 88px);
+        line-height: 0.96;
+      }
+
+      .fallback-role {
+        margin: 16px 0 34px;
+        color: #d6f6ff;
+        font-size: 24px;
+      }
+
+      .fallback-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        width: min(960px, 100%);
+      }
+
+      .fallback-card {
+        min-height: 132px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.48);
+      }
+
+      .fallback-card h2 {
+        margin: 0 0 10px;
+        color: #86efac;
+        font-size: 20px;
+      }
+
+      .fallback-card p {
+        margin: 0;
+        color: #f8fafc;
+        line-height: 1.55;
+      }
+
+      .fallback-visual {
+        position: relative;
+        width: 340px;
+        aspect-ratio: 1;
+        perspective: 900px;
+        filter: drop-shadow(0 0 28px rgba(34, 211, 238, 0.35));
+      }
+
+      .fallback-orbit,
+      .fallback-cube {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+      }
+
+      .fallback-orbit {
+        border: 2px solid rgba(125, 211, 252, 0.72);
+        border-radius: 50%;
+        animation: fallback-spin 12s linear infinite;
+      }
+
+      .fallback-orbit:nth-child(2) {
+        transform: rotateX(68deg);
+        animation-duration: 16s;
+      }
+
+      .fallback-orbit:nth-child(3) {
+        transform: rotateY(72deg);
+        animation-duration: 19s;
+      }
+
+      .fallback-cube {
+        width: 132px;
+        height: 132px;
+        top: calc(50% - 66px);
+        left: calc(50% - 66px);
+        animation: fallback-cube 8s ease-in-out infinite;
+      }
+
+      .fallback-cube span {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        border: 2px solid rgba(255, 255, 255, 0.62);
+        background: rgba(20, 184, 166, 0.42);
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 700;
+        box-shadow: 0 0 38px rgba(45, 212, 191, 0.28);
+      }
+
+      .fallback-cube span:nth-child(1) {
+        transform: translateZ(66px);
+      }
+
+      .fallback-cube span:nth-child(2) {
+        transform: rotateY(90deg) translateZ(66px);
+      }
+
+      .fallback-cube span:nth-child(3) {
+        transform: rotateY(180deg) translateZ(66px);
+      }
+
+      .fallback-cube span:nth-child(4) {
+        transform: rotateY(-90deg) translateZ(66px);
+      }
+
+      .fallback-cube span:nth-child(5) {
+        transform: rotateX(90deg) translateZ(66px);
+      }
+
+      .fallback-cube span:nth-child(6) {
+        transform: rotateX(-90deg) translateZ(66px);
+      }
+
+      .fallback-bars {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        align-items: end;
+        margin-top: 30px;
+        transform: skewX(-10deg);
+      }
+
+      .fallback-bars span {
+        width: 28px;
+        border-radius: 6px 6px 0 0;
+        background: linear-gradient(#86efac, #22d3ee);
+        box-shadow: 0 0 28px rgba(34, 211, 238, 0.35);
+        animation: fallback-bars 2.4s ease-in-out infinite;
+      }
+
+      .fallback-bars span:nth-child(1) {
+        height: 92px;
+      }
+
+      .fallback-bars span:nth-child(2) {
+        height: 148px;
+        animation-delay: 0.2s;
+      }
+
+      .fallback-bars span:nth-child(3) {
+        height: 118px;
+        animation-delay: 0.4s;
+      }
+
+      .fallback-bars span:nth-child(4) {
+        height: 174px;
+        animation-delay: 0.6s;
+      }
+
+      @keyframes fallback-spin {
+        from {
+          transform: rotateX(58deg) rotateZ(0deg);
+        }
+
+        to {
+          transform: rotateX(58deg) rotateZ(360deg);
+        }
+      }
+
+      @keyframes fallback-cube {
+        0%,
+        100% {
+          transform: rotateX(-18deg) rotateY(32deg);
+        }
+
+        50% {
+          transform: rotateX(22deg) rotateY(212deg);
+        }
+      }
+
+      @keyframes fallback-bars {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-18px);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .fallback-page {
+          padding: 32px 20px;
+        }
+
+        .fallback-content {
+          grid-template-columns: 1fr;
+        }
+
+        .fallback-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .fallback-visual {
+          width: min(280px, 76vw);
+          margin: 30px auto 0;
+        }
+
+        .fallback-bars {
+          justify-content: center;
+          width: 100%;
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BtHB1Hp5.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CpMi0-aA.css">
+  </head>
+  <body>
+    <div id="root">
+      <div class="fallback-page">
+        <div class="fallback-content">
+          <div class="fallback-copy">
+            <p class="fallback-eyebrow">Portfolio</p>
+            <h1>Thanushree M</h1>
+            <p class="fallback-role">Data Analyst</p>
+
+            <section class="fallback-grid" aria-label="Portfolio details">
+              <div class="fallback-card">
+                <h2>Skills</h2>
+                <p>Python, SQL, Power BI, Excel</p>
+              </div>
+              <div class="fallback-card">
+                <h2>Projects</h2>
+                <p>Netflix AI Voice Search, Electro AI IoT Platform</p>
+              </div>
+              <div class="fallback-card">
+                <h2>Experience</h2>
+                <p>Titan Company Pvt Ltd - Intern<br />Industrial Power Systems Exposure</p>
+              </div>
+            </section>
+          </div>
+
+          <div>
+            <div class="fallback-visual" aria-hidden="true">
+              <div class="fallback-orbit"></div>
+              <div class="fallback-orbit"></div>
+              <div class="fallback-orbit"></div>
+              <div class="fallback-cube">
+                <span>SQL</span>
+                <span>BI</span>
+                <span>AI</span>
+                <span>PY</span>
+                <span>XL</span>
+                <span>DA</span>
+              </div>
+            </div>
+
+            <div class="fallback-bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
